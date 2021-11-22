@@ -1,3 +1,9 @@
+Downloading R
+https://cran.r-project.org/
+
+Downloading Rstudio
+https://www.rstudio.com/
+
 Cómo generar clave pública SSH
 https://git-scm.com/book/es/v2/Git-en-el-Servidor-Generando-tu-clave-p%C3%BAblica-SSH
 
