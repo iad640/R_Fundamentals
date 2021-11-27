@@ -144,7 +144,10 @@ str(na_example)
 #However, when computing the average it gives an error
 mean(na_example)
 
-#The is.na function returns a logical vector that tells us which entries are NA. Assign this logical vector to an object called ind and determine how many NAs does na_example have
+#The is.na function returns a logical vector that tells us which entries are NA. 
+#To ignore the NAs we can use the na.rm argument
+mean(na_example, na.rm=TRUE)
+#Assign this logical vector to an object called ind and determine how many NAs does na_example have
 ind<-is.na(na_example)
 ind
 factors_na_example<-factor(ind)
@@ -432,6 +435,42 @@ as.matrix()
 row.names()
 #for columns:
 names()
+
+#---------------------------------3.4.1 TIBBLES------------------------
+#These are special data frames returned from functions from the dplyr package, included in the tidyverse
+#The print method for tibbles is more readable than that of data frames. Lets chech this with murders
+murders
+
+
+as_tibble(murders)
+  
+#When subseting a data frame, we can obtain something that is not a data frame. For example:
+murders[,2]%>%class()
+#When subsetting a tibble, we obtain a tibble
+as_tibble(murders[,4])%>%class()
+#This is useful since tidyverse functions use data frames.
+#With tibbles, if we want to access the vector that defines a column, we use $
+class(as_tibble(murders)$population)
+
+#While data frame columns are made from vectors of numbers, characters, or logical values, tibbles can be made from
+#more complex objects such as functions or lists. Also, we can create a tibble from functions:
+tibble(id = c(1, 2, 3), func= c(mean, median, sd))
+#we can crate data frame in the tibble format as follows:
+grades <- tibble(names = c("John", "Juan", "Jean", "Yao"), exam_1 = c(95, 80, 90, 85), exam_2 = c(90, 85, 85, 90))
+      
+
+
+#This is similar with data.frame
+grades_df<-data.frame(names=c("John", "Juan", "Jean", "Yao"), exam_1 = c(95, 80, 90, 85), exam_2 = c(90, 85, 85, 90))
+#However, while tibble maintains characters as characters, 
+class(grades$names)
+#data.frame in previous versions of R coerces characters into factors without providing a warning message. But now, character class is maintainded
+class(grades_df$names)
+#However, we can use stringsAsFactors function
+grades_df<-data.frame(names=c("John", "Juan", "Jean", "Yao"), exam_1 = c(95, 80, 90, 85), exam_2 = c(90, 85, 85, 90), stringsAsFactors =TRUE)
+class(grades_df$names)
+
+
 #---------------------------3.5-LISTS-------------------------------------
 
 #A list in R allows you to gather a variety of objects under one name (that is, the name of the list) in an ordered way.
@@ -486,6 +525,7 @@ my_list[["df"]][,1]
 #sort() is a function that sorts a vector in increasing order
 a <- c(100, 10, 1000)
 sort(a)
+sort(a, decreasing = TRUE)
 #order() is a function that gives you the ranked position of each element when it is applied on a variable, such as a vector for example:
 
 order(a)

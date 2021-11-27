@@ -56,7 +56,27 @@ all(z)
 all(w)
 all(c(TRUE,TRUE))
 
-#---------------------------DEFINING FUNCTIONS-----------------------------------
+#----------------------tidyverse conditionals------------------------------
+#we are seeing here conditionals from the purrr package, included in the tidyverse package
+
+# The case_when function is useful for vectorizing conditional statements. It is similar to ifelse but can output any number of values,
+#opposed to just TRUE or FALSE. Here there is an example splitting numbers into negative, positive or 0
+x<-c(-2, -1, 0, 1, 2)
+
+
+case_when(x <0 ~"Negative", x>0 ~"Positive", TRUE~"zero")
+#A common use of this function is to define categorical variables based on existing variables.
+#For example, suppose we want to compare the murder rates in three groups of states: New England, West Coast, South and other
+murders %>% mutate(group = case_when(abb %in% c("ME", "NH", "VT", "MA", "RI", "CT")~"New England", abb %in% c("WA", "OR", "CA") ~ "West Coast", region == "South" ~ "South", TRUE ~"Other")) %>% group_by(group) %>% summarize(rate=sum(total)/sum(population)*10^5)
+#------------between
+#A common operation is to determine if a value falls inside an interval. We can check this using conditionals like:
+#x>=a & x<=b
+#Or we can use a between function
+#between(x, a, b)
+x<-3
+between(x, 1, 7)
+
+#------------DEFINING FUNCTIONS-----------------------------------
 #lET'S WRITE AN EXAMPLE OF FUNCTION DEFINITION IN r. tHE FOLLOWING FUNCTION COMPUTES THE AVERAGE OF A VECTOR
 
 avg<-function(x){
