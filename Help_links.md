@@ -7,6 +7,9 @@ https://www.rstudio.com/
 Cómo generar clave pública SSH
 https://git-scm.com/book/es/v2/Git-en-el-Servidor-Generando-tu-clave-p%C3%BAblica-SSH
 
+Libro de R. Irizary
+https://rafalab.github.io/dsbook/
+
 #-----------------------------GIT AND GIT HUB--------------------------------------
 
 Setting git and github for the first time
