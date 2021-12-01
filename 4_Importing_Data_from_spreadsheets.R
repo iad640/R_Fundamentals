@@ -44,10 +44,38 @@ file.copy(fullpath, "murders.csv")
 list.files()
 
 #The readr library includes functions for reading data stored in text file spreadsheets into R. It is part of the tidyverse
-#we can read the full file:
-dat<-read_csv(filename)
-#OR we can open it looking at few lines:
+#To know which function from readr we must use, we need to know which kind of file is it: csv, txt, etc. 
+#For this, we need to open it looking at few lines:
 read_lines("murders.csv", n_max=3)
-dat
+#Now, that we know it is comma separated files, we can read the full file with the corresponding function:
+dat<-read_csv(filename)
+
 #Note that we can confirm that the data has in fact been read-in
 View(dat)
+
+#Examples from pp 80 of INTRODUCTION TO DATA SCIENCE IN R
+path<-system.file("extdata", package="dslabs")
+files<-list.files(path)
+files
+filename<-"olive.csv"
+filepath<-file.path(path,filename)
+read_lines(filepath,n_max=2)
+data<-read_csv(filepath, header=FALSE)
+View(data)
+?read_csv
+read_lines(filepath,n_max=1)
+#-------------------Downloading files from internet----------------------
+url<-"https://raw.githubusercontent.com/rafalab/dslabs/master/inst/extdata/murders.csv"
+url<-"https://raw.githubusercontent.com/vstanev1/Supercon/master/Supercon_data.csv"#data of critical temperature for superconducting transition
+dat_supercon<-read_csv(url)
+dat_supercon
+View(dat_supercon)
+#If you want to save a local copy in our working directory
+download.file(url, "dat_supercon.csv")
+list.files()
+data<-read_csv("dat_supercon.csv")
+View(data)
+#Two functions that are usually useful are tempfile and tempname. See in the book, pp81.
+#To remove a file, use this
+file.remove("dat_supercon.csv")
+
